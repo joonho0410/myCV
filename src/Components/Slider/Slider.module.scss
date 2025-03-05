@@ -1,0 +1,88 @@
+.contents__container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.controlBar {
+	display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  padding-left: 16px;
+  padding-right: 16px;
+
+	button {
+		background-color: transparent; /* 버튼 배경 투명 */
+		border: 2px solid #ccc; /* 버튼 테두리 */
+		border-radius: 8px; /* 버튼 모서리 둥글게 */
+		padding: 8px 16px; /* 버튼 내 여백 */
+		font-size: 16px; /* 글자 크기 */
+		cursor: pointer; /* 마우스를 올리면 커서가 포인터로 변경 */
+		transition: background-color 0.3s ease, border-color 0.3s ease; /* 배경색과 테두리 색 변화에 애니메이션 추가 */
+
+		&:hover {
+			background-color: #f0f0f0; /* 마우스를 올리면 배경색이 바뀌도록 */
+  		border-color: #888; /* 테두리 색을 어두운 회색으로 변경 */
+		}
+		&:active {
+			background-color: #ddd; /* 클릭 시 배경색 */
+			border-color: #555; /* 클릭 시 테두리 색 */
+		}
+	}
+}
+
+///////////////
+/// sliderBar
+///////////////
+
+.sliderBar {
+
+	button {
+
+	}
+}
+
+
+.slideBar__window {
+	width: 600px;
+	height: 400px;
+	overflow: hidden;
+}
+
+.slideBar__slider {
+	white-space: nowrap;
+	transform: translateX(-600px);
+	transition: transform 1s ease-in-out;
+
+	img {
+			object-fit: contain;
+	}
+}
+
+//////////////
+/// Indicator
+//////////////
+
+.indicator {
+  display: flex;
+	padding: 12px 0px;
+  justify-content: center; /* 인디케이터들이 가로로 중앙 정렬 */
+  align-items: center; /* 세로로 중앙 정렬 */
+  gap: 10px; /* 인디케이터 간 간격 */
+}
+
+.indicator__span {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%; /* 원 모양 */
+  background-color: transparent; /* 기본은 빈 원 */
+  border: 2px solid #ccc; /* 빈 원의 테두리 색 */
+  transition: background-color 0.3s ease, border-color 0.3s ease; /* 애니메이션 추가 */
+}
+
+.indicator__span__active {
+  background-color: #333; /* 활성화된 인디케이터는 채워진 원 */
+  border-color: #333; /* 활성화된 원의 테두리 색 */
+}

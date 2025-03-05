@@ -29,8 +29,10 @@ const Project = () => {
 		<section className={styles.project}>
 			<h2> 프로젝트 및 교육 </h2>
 			<div className={styles.project__contents}>
-				<Project.Tab selected={selected} setSelected={setSelected}/>
-				<Project.Description projectInfo={projectInfo!}/>
+				<div>
+					<Project.Tab selected={selected} setSelected={setSelected}/>
+					<Project.Description projectInfo={projectInfo!}/>
+				</div>
 			</div>
 		</section>
 	)
