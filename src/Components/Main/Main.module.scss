@@ -1,0 +1,61 @@
+/* Header.module.scss */
+.main__container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  padding: 130px;
+  background-color: #D09064;
+}
+
+
+.name {
+  position: absolute;
+  display: inline-block;
+  top: 190px;
+  right: 130px;
+  text-align: right;
+  font-weight: 900;
+  line-height: 128px;
+  font-size: 128px;
+  color: #5C280A; 
+
+  animation: nameAnimation 2s ease-in-out;
+}
+
+.description__paragraph {
+  position: absolute;
+  text-align:left;
+  font-weight: 900;
+  font-size: 60px;
+  bottom: 130px;
+  color: black;
+  
+  .cursor {
+    display: inline-block;
+    width: 3px;
+    height: 60px;
+    background-color: #E5641A;
+    vertical-align: text-top;
+    animation: blink 0.75s infinite;
+  }
+  
+  .typo {
+    color: #5C280A;
+  }
+}
+
+@keyframes blink {
+  50% {
+    background-color: transparent;
+  }
+}
+
+@keyframes nameAnimation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

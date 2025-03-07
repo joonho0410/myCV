@@ -43,7 +43,7 @@ const Project = () => {
 ///////////////////////
 
 const Tab = ({ selected, setSelected } : { selected: ProjectNames, setSelected: React.Dispatch<React.SetStateAction<ProjectNames>>}) => {
-	const handleClick = useCallback((e:React.MouseEvent<HTMLDivElement>) => {
+	const handleClick = useCallback((e:React.MouseEvent<HTMLElement>) => {
 		if (e.target instanceof HTMLElement) {
 			const id = e.target.dataset.id
 			if (!id) return ;
@@ -52,9 +52,9 @@ const Tab = ({ selected, setSelected } : { selected: ProjectNames, setSelected: 
 	}, [setSelected])
 
 	return (
-		<div className={styles.tab} onClick={handleClick}>
-				{projectName.map((name) => <button key={name} data-id={name} className={selected === name ? styles.tab__button__selected : styles.tab__button__default}> {name} </button>)}
-		</div>
+		<ul className={styles.tab} onClick={handleClick}>
+			{projectName.map((name) => <li key={name} data-id={name} className={selected === name ? styles.tab__button__selected : styles.tab__button__default}> {name} </li>)}
+		</ul>
 	)
 }
 
@@ -73,7 +73,7 @@ const Description = ({ projectInfo } : {projectInfo: ProjectContentsType}) => {
 				<li> 역할 : {role} </li>
 				<li> 한 일 </li>
 					<ul>
-						{tasks.map((e) => <li> {e} </li>)}
+						{tasks.map((e) => <li key={e}> {e} </li>)}
 					</ul>
 			</ul>
 			<p> {description} </p>

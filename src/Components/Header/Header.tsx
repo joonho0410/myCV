@@ -1,62 +1,79 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from 'react'
 import styles from './Header.module.scss'
 
-const myGoals = ['사용자의 경험을 중요하게 생각하는', '읽기 쉬운 코드를 위해 노력하는', '더 좋은 해결법을 찾기위해 노력하는']
+const sections = ['Main', 'Profile & Skill', 'Education & Project', 'Other Activity']
 
-const Header = () => {
-    return (
-        <header className={styles.header__container}>
-            <img src='/ProfileBackground.jpg' className={styles.header__backgroundImage}/>
-            <Header.ProfileDescription/>    
-            {/* <Header.ProfileImage/>         */}
-        </header>
-    )
-}
+const Header = ({children} : {children: any}) => {
+    const [sectionIdx, setSectionIdx] = useState(0)
+    const [isAnimation, setIsAnimation] = useState(false)
 
-Header.ProfileImage = () => {
-    return (
-        <div className={styles.image__container}>
-            <img></img>
-        </div> 
-    );
-}
+    const sectionIndicatorRef = useRef<HTMLDivElement | null>(null)
+    const layoutRef = useRef<HTMLDivElement | null>(null)
+    const highlightCurrentSectionRef = useRef<HTMLDivElement | null>(null)
 
-Header.ProfileDescription = () => {
-    const [index, setIndex] = useState(0)
-    const textRef = useRef<HTMLSpanElement>(null)
+    const clickSection = useCallback((e: React.MouseEvent<HTMLElement>) => {
+        const target = e.target as HTMLElement
+        const sectionId = Number(target.dataset.sectionid)
+        if (sectionId === undefined) return ;
+        
+        setSectionIdx(sectionId)
 
-    const typeWords = (ref: React.RefObject<HTMLSpanElement | null>, target: string[], idx: number) => setTimeout(() => {
-        if (!ref.current) return ;
-        if (idx >= target.length) { setTimeout(() => {
-                deleteWords(ref);
-            }, 1000);
-            return ;
+    }, [setSectionIdx])
+
+    const wheelSection = (e: React.WheelEvent<HTMLElement>) => {
+        if (isAnimation) return ;
+        
+        if (e.deltaY > 0) {
+            if (sectionIdx === sections.length - 1) return ;
+            setSectionIdx(sectionIdx + 1) 
+        } else if (e.deltaY < 0) {
+            if (sectionIdx === 0) return ;
+            setSectionIdx(sectionIdx - 1)
         }
-        ref.current.innerHTML += target[idx]
-        typeWords(ref, target, idx + 1)
-    }, 100)
-    
-    const deleteWords = (ref: React.RefObject<HTMLSpanElement | null>) => setTimeout(() => {
-        if (!ref.current) return ;
-        if (ref.current.innerHTML.length === 0) {setIndex((prev) => (prev + 1) % myGoals.length ); return ;}
-        ref.current.innerHTML = ref.current.innerHTML.slice(0, -1);
-        deleteWords(ref)
-    }, 100)
 
-    // 하나씩 늘어나는 효과
+        setIsAnimation(true);
+        setTimeout(() => {
+            setIsAnimation(false)
+        }, 1000)
+    };
+      
+
     useEffect(() => {
-        const id = typeWords(textRef, myGoals[index].split(''), 0)
-        return () => clearTimeout(id)
-    }, [index])
+        if (!layoutRef.current) return ;
+        
+        layoutRef.current.style.transform = `translateY(${-100 * sectionIdx}vh)`
+    }, [sectionIdx])
+
+    useEffect(() => {
+        if (!sectionIndicatorRef.current || !highlightCurrentSectionRef.current) return ;
+        
+        const targetChild = sectionIndicatorRef.current.children[sectionIdx] as HTMLSpanElement
+        
+        if (targetChild) {
+            // 자식 요소의 width와 offsetLeft 값 얻기
+            const width = targetChild.offsetWidth;
+            const offsetLeft = targetChild.offsetLeft;
+            const offsetTop = targetChild.offsetTop + targetChild.offsetHeight;
+            
+            highlightCurrentSectionRef.current.style.width = `${width}px`
+            highlightCurrentSectionRef.current.style.left = `${offsetLeft}px`
+            highlightCurrentSectionRef.current.style.top = `${offsetTop}px`
+          }
+    }, [sectionIdx])
 
     return (
-        <p className={styles.description__paragraph}>
-            <span ref={textRef}/><span className={styles.cursor}>.</span>
-            <br/>
-            프론트 엔드 개발자 🚀<br/>
-            전준호 입니다.
-        </p>
+        <>
+            <header onClick={clickSection} className={styles.header}>
+                <div ref={sectionIndicatorRef} className={styles.indicator}>
+                    {sections.map((name, idx) => <span key={name} data-sectionid={idx}> {name} </span>)}
+                </div>
+                <div ref={highlightCurrentSectionRef} className={styles.highlight}/>
+            </header>
+            <div ref={layoutRef} className={styles.layout} onWheel={wheelSection}>
+                {children}
+            </div>
+        </>
     )
 }
 
-export default Header
+export default Header;
