@@ -1,0 +1,130 @@
+//////////////
+/// section
+///
+/// 
+.section__container {
+    position: relative;
+    padding: 130px;
+    width: 100%;
+    height: 100vh;
+    background-color: #A96036;
+
+    display: flex;
+    flex-direction: column;
+    
+    h2 {
+        font-size: 64px;
+        font-weight: 900;
+        align-self: flex-end;
+        color: #5C280A;
+        text-shadow: 2px 2px 2px black;
+    }
+}
+
+.section__presentation {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 4px black;
+    display: flex;
+    background-color: #F2E4CF
+}
+
+///////////////
+/// profile
+///
+///  
+.profile__container {
+    display: flex;
+    padding: 40px 20px 20px 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border-radius: 20px;
+    width: 400px;
+    background-color: #F2E4CF;
+    color: black;
+    text-align: center;
+    box-shadow: 1px 1px 4px black;
+    font-weight: 700;
+    word-break: keep-all;
+    span {
+        display: inline-block;
+    }
+}
+
+.profile__image {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background-color: white;
+    margin-bottom: 20px;
+}
+///////////////
+/// contents
+/// 
+/// 
+
+.contents__container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.timeLine__container {
+    position: relative;
+    display: flex;
+    gap: 200px;
+    margin: auto;
+    background-color: transparent;
+}
+
+.timeLine__dot {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    border-radius: 50%;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        width: 200px;
+        height: 2px;
+        background-color: black;
+        transform: translateY(-50%);
+    }
+
+    &:last-child::after {
+        display: none;
+    }
+}
+
+.timeLine__text {
+    position: absolute;
+    background-color: lightgray;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.timeLine__dot:nth-child(odd) .timeLine__text {
+    top: 30px; /* 홀수 번째 점 위로 텍스트 배치 */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.timeLine__dot:nth-child(even) .timeLine__text {
+    bottom: 30px; /* 짝수 번째 점 아래로 텍스트 배치 */
+    left: 50%;
+    transform: translateX(-50%);
+}

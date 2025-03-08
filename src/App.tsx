@@ -1,21 +1,19 @@
 import './App.css'
-import Header from './Components/Header/Header'
+import Layout from './Components/Layout/Layout'
 import Main from './Components/Main/Main'
 import Others from './Components/Others/Others'
 import Project from './Components/Project/Project'
-import Skills from './Components/Skills/Skills'
+import ProfileAndSkills from './Components/ProfileAndSkills/ProfileAndSkills'
 
 function App() {
 
   return (
-    <>
-      <Header>
-        <Main/>
-        <Skills/>
-        <Project/>
-        <Others/>
-      </Header>
-    </>    
+    <Layout>
+      <Main/>
+      <ProfileAndSkills/>
+      <Project/>
+      <Others/>
+    </Layout>    
   )
 }
 

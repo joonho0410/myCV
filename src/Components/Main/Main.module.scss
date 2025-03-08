@@ -30,32 +30,7 @@
   bottom: 130px;
   color: black;
   
-  .cursor {
-    display: inline-block;
-    width: 3px;
-    height: 60px;
-    background-color: #E5641A;
-    vertical-align: text-top;
-    animation: blink 0.75s infinite;
-  }
-  
   .typo {
     color: #5C280A;
-  }
-}
-
-@keyframes blink {
-  50% {
-    background-color: transparent;
-  }
-}
-
-@keyframes nameAnimation {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
   }
 }

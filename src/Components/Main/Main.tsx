@@ -42,7 +42,7 @@ Main.ProfileDescription = () => {
 
     return (
         <p className={styles.description__paragraph}>
-            <span className={styles.typo} ref={textRef}/><span className={styles.cursor}/><br/>
+            <span className={styles.typo} ref={textRef}/><br/>
             프론트엔드 개발자 🚀<br/>
             전준호 입니다.
         </p>

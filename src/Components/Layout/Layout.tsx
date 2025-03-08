@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import styles from './Header.module.scss'
+import styles from './Layout.module.scss'
 
 const sections = ['Main', 'Profile & Skill', 'Education & Project', 'Other Activity']
 
@@ -41,7 +41,8 @@ const Header = ({children} : {children: any}) => {
     useEffect(() => {
         if (!layoutRef.current) return ;
         
-        layoutRef.current.style.transform = `translateY(${-100 * sectionIdx}vh)`
+        const targetChild = layoutRef.current.children;
+        targetChild[sectionIdx].scrollIntoView({ behavior: 'smooth', block: 'start'})
     }, [sectionIdx])
 
     useEffect(() => {
